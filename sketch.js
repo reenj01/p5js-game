@@ -30,7 +30,7 @@ function resetLines() {
 
 function draw() {
   background(255);
-  
+
   // the 2 horiz and 2 vertic lines at beginning
   strokeWeight(1);
 
