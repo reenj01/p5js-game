@@ -1,6 +1,8 @@
 let video, handPose;
 let hands = [];
 
+let horizY1, horizY2, vertX1, vertX2 = 0;
+
 function preload(){
   handPose = ml5.handPose({flipped: true});
 }
@@ -43,6 +45,25 @@ function draw() {
 
   noStroke();
   drawingContext.setLineDash([])
+
+  let rectLeft = Math.min(vertX1, vertX2);
+  let rectRight = Math.max(vertX1, vertX2);
+  let rectTop = Math.min(horizY1, horizY2);
+  let rectBottom = Math.max(horizY1, horizY2);
+
+  let rectW = rectRight - rectLeft;
+  let rectH = rectBottom - rectTop;
+
+  // the avatar
+  if (rectW > 0 && rectH > 0) {
+    let centerX = (rectLeft + rectRight) / 2;
+    let centerY = (rectTop + rectBottom) / 2;
+    let r = 20;
+
+    fill(0, 255, 0);
+    stroke(255);
+    circle(centerX, centerY, r * 2);
+  }
 
   // detect which hands
   let leftHand = null;
